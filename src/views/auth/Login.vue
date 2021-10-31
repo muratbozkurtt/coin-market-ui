@@ -51,7 +51,6 @@ export default {
     },
 
     async login() {
-      debugger
       const signIn = await this.login(this.user);
       signIn.isSuccess
         ? this.$router.push({ path: "/" })
