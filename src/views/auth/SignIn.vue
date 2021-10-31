@@ -37,24 +37,25 @@ export default {
   data() {
     return {
       user: {
-        email: "",
-        password: "",
+        email: '',
+        password: '',
       },
       show: true,
+      failMessage : ''
     };
   },
   methods: {
-    ...mapActions({ login: "auth/login" }),
+    ...mapActions({ signIn: "auth/signIn" }),
 
     onSubmit() {
-      this.login();
+      this.signInForm();
     },
 
-    async login() {
-      const signIn = await this.login(this.user);
-      signIn.isSuccess
-        ? this.$router.push({ path: "/" })
-        : (this.failMessage = signIn.message);
+   async signInForm() {
+      const token = await this.signIn(this.user);
+      // eslint-disable-next-line no-debugger
+      debugger
+      token ? this.$router.push({ path: "/" }) : (this.failMessage = token.message);
     },
   },
 };

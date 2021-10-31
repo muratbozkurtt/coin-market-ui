@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BlankLayout from '../layouts/BlankLayout'
-import ErrorPage from '@/views/Pages/ErrorPage'
+import ErrorPage from '@/views/ErrorPage'
 import store from '../store'
-import Login from '../views/Login'
-import CoinMarket from '../views/CoinMarket'
+import SignIn from '../views/auth/SignIn'
+import CoinList from '../views/coinMarket/CoinList'
 
 Vue.use(VueRouter)
 
@@ -15,23 +15,23 @@ const routes = [
         component: BlankLayout,
         children: [
             {
-                path: 'login',
-                name: 'login',
-                component: Login,
-                meta: { title: 'Login' },
+                path: 'signIn',
+                name: 'SignIn',
+                component: SignIn,
+                meta: { guest: true, title: 'Sign In' },
             },
         ],
     },
     {
-        path: '/coinMarket',
-        name: 'coinMarket',
+        path: '/',
+        name: 'Dashboard',
         component: BlankLayout,
         meta: { requiresAuth: true },
         children: [
             {
-                path: 'coinList',
-                name: 'coinList',
-                component: CoinMarket,
+                path: '/',
+                name: 'CoinList',
+                component: CoinList,
                 meta: { requiresAuth: true, title: 'Coin List' },
             },
         ],
@@ -43,25 +43,39 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     base: process.env.BASE_URL,
     routes,
 })
 
 
 router.beforeEach((to, from, next) => {
-    const isAuthenticated = store.getters['auth/isAuthenticated']
-        && localStorage.getItem('authUser')?.length > 0;
-
-    if (to.matched.some(route => route.meta.requiresAuth)) {
+    const isAuthenticated = store.getters['auth/isAuthenticated'] && localStorage.getItem('TokenParibu')?.length > 0;
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
         if (isAuthenticated) {
             next();
             return;
-        } else {
-            next({ path: '/login' });
         }
+        next("/auth/signIn");
+    } else {
+        next();
     }
-    next();
 });
+
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = store.getters['auth/isAuthenticated'] && localStorage.getItem('TokenParibu')?.length > 0;
+    if (to.matched.some((record) => record.meta.guest)) {
+        if (isAuthenticated) {
+            next("/");
+            return;
+        }
+        next();
+    } else {
+        next();
+    }
+});
+
+
+
 
 export default router;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="container">
       <router-view />
     </div>
   </div>
@@ -10,4 +10,9 @@ export default {
   name: "BlankLayout",
 };
 </script>
-<style>
+<style scoped>
+.container {
+  margin: 0 auto;
+  width: 80%;
+}
+</style>

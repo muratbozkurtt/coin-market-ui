@@ -12,7 +12,7 @@ const showError = (errorMessage) => {
 const showWarning = (warningMessage) => {
     Vue.notify({
         group: 'notify',
-        title: 'Uyarı:',
+        title: 'Warning:',
         text: warningMessage,
         type: 'error',
         ignoreDuplicates: true,
@@ -23,7 +23,7 @@ const showWarning = (warningMessage) => {
 const showNotification = (notificationMessage) => {
     Vue.notify({
         group: 'notify',
-        title: 'Bildiri:',
+        title: 'Notification:',
         text: notificationMessage,
         type: 'success',
         ignoreDuplicates: true,
