@@ -48,14 +48,12 @@ export default {
     ...mapActions({ signIn: "auth/signIn" }),
 
     onSubmit() {
-      this.signInForm();
+       this.signInForm();
     },
 
    async signInForm() {
-      const token = await this.signIn(this.user);
-      // eslint-disable-next-line no-debugger
-      debugger
-      token ? this.$router.push({ path: "/" }) : (this.failMessage = token.message);
+      await this.signIn(this.user);
+      this.$router.push({ path: "/" })
     },
   },
 };

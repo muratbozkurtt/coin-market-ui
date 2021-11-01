@@ -1,5 +1,5 @@
 <template>
-  <div v-if="coinResultMap" class="mt-10">
+  <div class="mt-10">
     <b-button @click="getCoins()" variant="success">Refresh</b-button>
     <b-table class="mt-10" striped hover :items="coinResultMap"></b-table>
   </div>
@@ -19,13 +19,12 @@ export default {
       coinResultMap: [],
     };
   },
-  created() {
-    this.getCoins();
+  mounted() {
+     this.getCoins();
   },
   methods: {
     async getCoins() {
-      const coinResult = await coinMarketServices.getCoins(this.coinRequest)
-        .then;
+      const coinResult = await coinMarketServices.getCoins(this.coinRequest);
       this.coinResultMap = coinResult.data.map((item) => {
         return {
           name: item.name,

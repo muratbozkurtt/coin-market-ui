@@ -14,7 +14,8 @@ export default {
         },
     },
     actions: {
-       async signIn({ commit }, credentials) {
+        async signIn({ commit }, credentials) {
+           
             let token = await authService.signIn(credentials);
             if (token) {
                 localStorage.setItem('TokenParibu', token);

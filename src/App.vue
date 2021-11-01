@@ -6,8 +6,16 @@
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-}
+  name: "App",
+};
 </script>
+
+<style lang="scss">
+html,
+body {
+  margin: 0;
+  padding: 30px;
+  height: 80%;
+}
+</style>

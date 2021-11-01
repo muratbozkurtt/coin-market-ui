@@ -29,8 +29,6 @@ const adminGateway = axios.create({
     paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'comma' })
 })
 
-
-
 adminGateway.interceptors.response.use((res) => success(res), (err) => error(err))
 
 export default adminGateway
