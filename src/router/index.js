@@ -28,7 +28,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const isAuthenticated = store.getters['auth/isAuthenticated'] && localStorage.getItem('TokenParibu')?.length > 0;
+    const isAuthenticated = store.getters['auth/isAuthenticated'] && localStorage.getItem('JwtToken')?.length > 0;
     const requiresAuth = to.matched.some(route => route.meta.requiresAuth)
     if (isAuthenticated && to.name === 'SignIn') {
         next('/')

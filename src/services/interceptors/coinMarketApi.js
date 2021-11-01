@@ -19,13 +19,13 @@ const error = (err) => {
 }
 
 let token = "";
-if (localStorage.TokenParibu) {
-    token = localStorage.TokenParibu;
+if (localStorage.JwtToken) {
+    token = localStorage.JwtToken;
 }
 
 const adminGateway = axios.create({
     baseURL: "http://localhost:5090",
-    headers: { 'TokenParibu' : token },
+    headers: { 'JwtToken' : token },
     paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'comma' })
 })
 

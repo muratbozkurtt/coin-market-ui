@@ -18,10 +18,10 @@ export default {
            
             let token = await authService.signIn(credentials);
             if (token) {
-                localStorage.setItem('TokenParibu', token);
+                localStorage.setItem('JwtToken', token);
                 commit('SET_TOKEN', token)
             } else {
-                localStorage.removeItem('TokenParibu')
+                localStorage.removeItem('JwtToken')
                 commit('SET_TOKEN', null)
             }
             return token;
